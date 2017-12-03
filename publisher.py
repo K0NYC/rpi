@@ -13,6 +13,7 @@ sensor = W1ThermSensor()
 client = mqtt.Client()
 client.connect("192.168.10.8",1883,60)
 logging.info('Publisher started')
+client.loop_start()
 
 while True:
     client.publish("/livingroom/AC/temp", sensor.get_temperature(W1ThermSensor.DEGREES_F));
