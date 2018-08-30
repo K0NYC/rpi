@@ -4,14 +4,14 @@ ip_address=$1
 
 aws_cli_command="aws route53 change-resource-record-sets --hosted-zone-id xxx --change-batch file://xxx.json"
 
-cat <<EOF > ~/gits/rlevit/change-resource-record-sets.json
+cat <<EOF > file.json
 {
   "Comment": "Updating home IP address",
   "Changes": [
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "home.thelifeinpictures.com",
+        "Name": "home.domain.com",
         "Type": "A",
         "TTL": 60,
         "ResourceRecords": [
