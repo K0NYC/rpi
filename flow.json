@@ -47,11 +47,12 @@
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
-        "x": 118.90010070800781,
-        "y": 326.00003814697266,
+        "x": 130,
+        "y": 300,
         "wires": [
             [
-                "bf391096.52927"
+                "bf391096.52927",
+                "c2c2db5a.bb2618"
             ]
         ]
     },
@@ -67,7 +68,6 @@
         "y": 679.8890066146851,
         "wires": [
             [
-                "63b75e76.75d01",
                 "1e50b667.94c22a"
             ]
         ]
@@ -88,11 +88,12 @@
         "min": "55",
         "max": "90",
         "step": 1,
-        "x": 99.00016784667969,
-        "y": 208.888916015625,
+        "x": 110,
+        "y": 180,
         "wires": [
             [
-                "8bd1a870.89a438"
+                "8bd1a870.89a438",
+                "e53b1b14.e601d8"
             ]
         ]
     },
@@ -104,8 +105,8 @@
         "func": "global.set(\"desired_livingroom_temp\",msg.payload);\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 365.0002136230469,
-        "y": 208.6889705657959,
+        "x": 376.0000457763672,
+        "y": 179.8000545501709,
         "wires": [
             []
         ]
@@ -121,8 +122,8 @@
         "repeat": "86400",
         "crontab": "",
         "once": true,
-        "x": 83.19998550415039,
-        "y": 83.88886260986328,
+        "x": 90,
+        "y": 80,
         "wires": [
             [
                 "6bc2fd8.fd8cb04"
@@ -137,44 +138,10 @@
         "func": "global.set(\"action\",msg.payload);\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 738.1000556945801,
-        "y": 80.8888750076294,
+        "x": 780,
+        "y": 80,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "bad1b553.c2f9c8",
-        "type": "switch",
-        "z": "d086e503.3cf068",
-        "name": "If temp => desired",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gte",
-                "v": "desired_livingroom_temp",
-                "vt": "global"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "outputs": 2,
-        "x": 290,
-        "y": 740,
-        "wires": [
-            [
-                "ecbd5e8c.c71cf"
-            ],
-            [
-                "de94e712.4a4cc8"
-            ]
-        ],
-        "outputLabels": [
-            "off",
-            "on"
         ]
     },
     {
@@ -198,8 +165,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 337.1999931335449,
-        "y": 83.88886260986328,
+        "x": 350,
+        "y": 80,
         "wires": [
             [
                 "e51736c7.08a8a8"
@@ -228,8 +195,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 503.2000427246094,
-        "y": 65.88886260986328,
+        "x": 530,
+        "y": 60,
         "wires": [
             [
                 "74a21c3c.fba094"
@@ -255,8 +222,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 503.20004653930664,
-        "y": 99.88886451721191,
+        "x": 530.0000038146973,
+        "y": 94.00000190734863,
         "wires": [
             [
                 "74a21c3c.fba094"
@@ -282,14 +249,14 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 100,
-        "y": 760,
+        "x": 240,
+        "y": 820,
         "wires": [
             [
-                "bad1b553.c2f9c8"
+                "2145252f.66af1a"
             ],
             [
-                "fa6b77e1.1bc068"
+                "4a380d64.1bff64"
             ]
         ],
         "outputLabels": [
@@ -298,114 +265,13 @@
         ]
     },
     {
-        "id": "fa6b77e1.1bc068",
-        "type": "switch",
-        "z": "d086e503.3cf068",
-        "name": "If temp <= desired",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "lte",
-                "v": "desired_livingroom_temp",
-                "vt": "global"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "outputs": 2,
-        "x": 290,
-        "y": 780,
-        "wires": [
-            [
-                "ecbd5e8c.c71cf"
-            ],
-            [
-                "de94e712.4a4cc8"
-            ]
-        ],
-        "outputLabels": [
-            "off",
-            "on"
-        ]
-    },
-    {
-        "id": "99ac18a9.550788",
-        "type": "mqtt out",
-        "z": "d086e503.3cf068",
-        "name": "Send on/off to LR AC",
-        "topic": "/livingroom/AC/power",
-        "qos": "1",
-        "retain": "true",
-        "broker": "17712889.938867",
-        "x": 920,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "ecbd5e8c.c71cf",
-        "type": "change",
-        "z": "d086e503.3cf068",
-        "name": "Off",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "off",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 670,
-        "y": 740,
-        "wires": [
-            [
-                "99ac18a9.550788"
-            ]
-        ]
-    },
-    {
-        "id": "de94e712.4a4cc8",
-        "type": "change",
-        "z": "d086e503.3cf068",
-        "name": "On",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "on",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 530,
-        "y": 780,
-        "wires": [
-            [
-                "92a67d43.ef7a3"
-            ]
-        ]
-    },
-    {
         "id": "e8c7ea9.1743818",
         "type": "comment",
         "z": "d086e503.3cf068",
         "name": "Determine season and create global variable that holds values 'heat' or 'cool' ",
         "info": "",
-        "x": 279.1999816894531,
-        "y": 29.88886260986328,
+        "x": 290,
+        "y": 20,
         "wires": []
     },
     {
@@ -414,8 +280,8 @@
         "z": "d086e503.3cf068",
         "name": "Input desired temperature and create global var with its value",
         "info": "",
-        "x": 228,
-        "y": 164.00000381469727,
+        "x": 240,
+        "y": 140,
         "wires": []
     },
     {
@@ -436,47 +302,10 @@
         "func": "global.set(\"power_state_livingroom_ac\",msg.payload);\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 375.9001159667969,
-        "y": 324.8889503479004,
+        "x": 387.00001525878906,
+        "y": 298.88891220092773,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "92a67d43.ef7a3",
-        "type": "switch",
-        "z": "d086e503.3cf068",
-        "name": "Check if power switch is in 'OFF' position",
-        "property": "power_state_livingroom_ac",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 600,
-        "y": 840,
-        "wires": [
-            [
-                "99ac18a9.550788"
-            ],
-            [
-                "ecbd5e8c.c71cf"
-            ]
-        ],
-        "outputLabels": [
-            "on",
-            "off"
         ]
     },
     {
@@ -485,8 +314,8 @@
         "z": "d086e503.3cf068",
         "name": "Set AC power 'on' or 'off and create global var that holds that value",
         "info": "",
-        "x": 247,
-        "y": 285.88890075683594,
+        "x": 260,
+        "y": 260,
         "wires": []
     },
     {
@@ -506,8 +335,8 @@
         "output": "payload",
         "outputType": "msg",
         "outTz": "EST",
-        "x": 199.1999855041504,
-        "y": 82.88887596130371,
+        "x": 210,
+        "y": 80,
         "wires": [
             [
                 "c4730102.977b5"
@@ -536,8 +365,8 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 620,
-        "y": 680,
+        "x": 400,
+        "y": 740,
         "wires": []
     },
     {
@@ -552,7 +381,7 @@
         "label": "AC is ",
         "format": "{{msg.payload}}",
         "layout": "row-center",
-        "x": 800,
+        "x": 920,
         "y": 500,
         "wires": []
     },
@@ -575,7 +404,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 600,
+        "x": 740,
         "y": 540,
         "wires": [
             [
@@ -642,8 +471,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 430,
-        "y": 540,
+        "x": 570,
+        "y": 520,
         "wires": [
             [
                 "28cd03a3.f971ec"
@@ -679,7 +508,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 600,
+        "x": 740,
         "y": 460,
         "wires": [
             [
@@ -706,7 +535,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 580,
+        "x": 720,
         "y": 500,
         "wires": [
             [
@@ -725,50 +554,531 @@
         "wires": []
     },
     {
-        "id": "d7b4232d.60b2d",
-        "type": "debug",
-        "z": "d086e503.3cf068",
-        "name": "Rounded temp",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "x": 900,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "63b75e76.75d01",
-        "type": "debug",
-        "z": "d086e503.3cf068",
-        "name": "Raw temp",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "x": 270,
-        "y": 880,
-        "wires": []
-    },
-    {
         "id": "1e50b667.94c22a",
         "type": "function",
         "z": "d086e503.3cf068",
         "name": "Round up temp",
-        "func": "temp = parseFloat(msg.payload)\nrounded_to_1 = Math.round(temp).toFixed(1);\nrounded_to_0 = Math.round(temp).toFixed();\nvar decimal = parseFloat((temp).toFixed(1)) - parseFloat(Math.trunc(temp));\n\ndecimal = parseFloat(decimal).toFixed(1);\n\nif (parseFloat(decimal) == 0.4) {\n    temp = Math.round(rounded_to_1 - 0.1);\n    return msg;\n} else if (parseFloat(decimal) == 0.5) {\n    temp = Math.round(rounded_to_1 + 0.1);\n    return msg;\n} else {\n    msg.payload = Math.round(temp).toFixed();\n    return msg;\n}\n",
+        "func": "msg.payload = parseInt(Math.round(msg.payload).toFixed());\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 360,
-        "y": 680,
+        "x": 120,
+        "y": 740,
         "wires": [
             [
                 "a8786619.c8e5e8",
-                "f716d9dd.f7c698",
-                "d7b4232d.60b2d"
+                "be52ee65.c4c9d"
             ]
         ]
+    },
+    {
+        "id": "be52ee65.c4c9d",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Flag selector. If flag 0 output 1",
+        "property": "flag",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 170,
+        "y": 900,
+        "wires": [
+            [
+                "462f78bf.426e78",
+                "f716d9dd.f7c698"
+            ],
+            [
+                "d320e29c.3ff4f",
+                "2d6a63e.45fbf9c"
+            ]
+        ]
+    },
+    {
+        "id": "2145252f.66af1a",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Heat. If temp => desired",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "desired_livingroom_temp",
+                "vt": "global"
+            },
+            {
+                "t": "lt",
+                "v": "desired_livingroom_temp",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 800,
+        "wires": [
+            [
+                "c30edc96.4dd09",
+                "7d78dfac.b62ea",
+                "847ef8b7.37aa48"
+            ],
+            [
+                "d6c109ec.fa9028",
+                "5b1f97b.5a90568"
+            ]
+        ],
+        "outputLabels": [
+            "off",
+            "on"
+        ]
+    },
+    {
+        "id": "4a380d64.1bff64",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Cool. If temp <= desired",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "desired_livingroom_temp",
+                "vt": "global"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 840,
+        "wires": [
+            [
+                "c30edc96.4dd09",
+                "7d78dfac.b62ea"
+            ],
+            [
+                "d6c109ec.fa9028"
+            ]
+        ],
+        "outputLabels": [
+            "off",
+            "on"
+        ]
+    },
+    {
+        "id": "9a8e9ae2.65c348",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Heat. If temp => desired - 2",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "desired_livingroom_temp",
+                "vt": "global"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 440,
+        "y": 960,
+        "wires": [
+            [
+                "c30edc96.4dd09",
+                "51c76635.f5d348"
+            ],
+            [
+                "d6c109ec.fa9028",
+                "d1b31868.0dbfc8"
+            ]
+        ],
+        "outputLabels": [
+            "off",
+            "on"
+        ]
+    },
+    {
+        "id": "373b67b9.7c1078",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Cool. If temp <= desired + 2",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "desired_livingroom_temp",
+                "vt": "global"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 440,
+        "y": 1000,
+        "wires": [
+            [
+                "c30edc96.4dd09"
+            ],
+            [
+                "d6c109ec.fa9028"
+            ]
+        ],
+        "outputLabels": [
+            "off",
+            "on"
+        ]
+    },
+    {
+        "id": "c30edc96.4dd09",
+        "type": "change",
+        "z": "d086e503.3cf068",
+        "name": "Off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 780,
+        "wires": [
+            [
+                "ca8d97d5.dab038",
+                "50fed288.08077c"
+            ]
+        ]
+    },
+    {
+        "id": "d6c109ec.fa9028",
+        "type": "change",
+        "z": "d086e503.3cf068",
+        "name": "On",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 880,
+        "wires": [
+            [
+                "4bd96796.9a9038"
+            ]
+        ]
+    },
+    {
+        "id": "4bd96796.9a9038",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Check if power switch is in 'OFF' position",
+        "property": "power_state_livingroom_ac",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 920,
+        "y": 880,
+        "wires": [
+            [
+                "c633b55e.5f1d08",
+                "ca8d97d5.dab038",
+                "50fed288.08077c"
+            ],
+            [
+                "c30edc96.4dd09"
+            ]
+        ],
+        "outputLabels": [
+            "on",
+            "off"
+        ]
+    },
+    {
+        "id": "c633b55e.5f1d08",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Flag 0",
+        "func": "global.set(\"flag\", 0);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1190,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50fed288.08077c",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Mode",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1190,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "d06ed40f.879938",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Temp + 2",
+        "func": "msg.payload += 2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 960,
+        "wires": [
+            [
+                "9a8e9ae2.65c348"
+            ]
+        ]
+    },
+    {
+        "id": "4d69911.d4ad97",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Temp - 2",
+        "func": "msg.payload -= 2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 1000,
+        "wires": [
+            [
+                "373b67b9.7c1078"
+            ]
+        ]
+    },
+    {
+        "id": "462f78bf.426e78",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Test flag 0",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 470,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "d320e29c.3ff4f",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Test flag 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 470,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "7d78dfac.b62ea",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Flag 1",
+        "func": "global.set(\"flag\", 1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca8d97d5.dab038",
+        "type": "mqtt out",
+        "z": "d086e503.3cf068",
+        "name": "Send on/off to LR AC",
+        "topic": "/livingroom/AC/power",
+        "qos": "1",
+        "retain": "true",
+        "broker": "17712889.938867",
+        "x": 1240,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "c2c2db5a.bb2618",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Flag 0",
+        "func": "global.set(\"flag\", 0);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 321.0998992919922,
+        "y": 333.99996185302734,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "847ef8b7.37aa48",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Off",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 690,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "5b1f97b.5a90568",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "On",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 690,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "2d6a63e.45fbf9c",
+        "type": "switch",
+        "z": "d086e503.3cf068",
+        "name": "Heat/cool",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "heat",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 80,
+        "y": 980,
+        "wires": [
+            [
+                "d06ed40f.879938"
+            ],
+            [
+                "4d69911.d4ad97"
+            ]
+        ],
+        "outputLabels": [
+            "heat",
+            "cool"
+        ]
+    },
+    {
+        "id": "e53b1b14.e601d8",
+        "type": "function",
+        "z": "d086e503.3cf068",
+        "name": "Flag 0",
+        "func": "global.set(\"flag\", 0);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51c76635.f5d348",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Flag 1 Off",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 700,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "d1b31868.0dbfc8",
+        "type": "debug",
+        "z": "d086e503.3cf068",
+        "name": "Flag 1 On",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 700,
+        "y": 1000,
+        "wires": []
     },
     {
         "id": "17712889.938867",
